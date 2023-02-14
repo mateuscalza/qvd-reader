@@ -139,17 +139,15 @@ const getSymbolTable = (start, end, buff) => {
             case 4:
                 // Lectura de strings
                 // Avanzar en el arreglo (evitar el numero que indica el tipo)
-                // Crear una variable con un string vacio
-                let dato = '';
-                // Si se llega al final del string terminar de concatenar
-                while(buff[j] !== 0)
-                {
-                    // Concatenar el string y avanzar en el arreglo al siguiente string
-                    dato+=String.fromCharCode(buff[j]);
-                    j++;
+                // Declarar un array para almacenar los caracteres
+                let chars = [];
+                while (buff[j] !== 0) {
+                  // Agregar el caracter al array
+                  chars.push(buff[j]);
+                  j++;
                 }
-                // Mostrando el resultado del string
-                resultado.push(dato);
+                // Convertir el array de caracteres a string y agregarlo al resultado
+                resultado.push(Buffer.from(chars).toString('utf8'));
                 break;
             case 5:
                 const arTmp2 = new Int32Array(buff.slice(j, j+4));
